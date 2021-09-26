@@ -14,7 +14,7 @@ llvmPackages.stdenv.mkDerivation rec {
     owner = "ziglang";
     repo = pname;
     rev = version;
-    sha256 = "sha256-9xl7m4SSLf+nAtEvGbfZVSeYiZU89UCmY52H2RByzdM=";
+    sha256 = "sha256-I6N67/oYCoGUGmwhwrxqNR3TmdBqRYEk/6e9q76DRdU=";
   };
 
   nativeBuildInputs = [

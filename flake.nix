@@ -2,10 +2,10 @@
   description = "An experimental NUR repository";
 
   inputs = {
-    nixpkgs = { url = "github:NixOS/nixpkgs?ref=master"; };
+    nixpkgs = { url = "github:NixOS/nixpkgs?ref=nixos-unstable"; };
   };
 
-  outputs = { self, nixpkgs }: {
+  outputs = { self, nixpkgs }:
     let
       systems = [
         "x86_64-linux"
@@ -15,9 +15,8 @@
       ];
     in
     {
-      packages = nixpkgs.lib.genAttrs systems (system: import ./default.nix {
+      packages = nixpkgs.lib.genAttrs systems (system: (import ./default.nix {
         pkgs = import nixpkgs { inherit system; };
-      }.packages);
+      }).packages);
     };
-  };
 }
