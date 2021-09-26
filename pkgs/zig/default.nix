@@ -13,7 +13,7 @@ llvmPackages.stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "ziglang";
     repo = pname;
-    rev = version;
+    rev = "04366576ea4be4959b596ebff7041d17e18d08d8";
     sha256 = "sha256-I6N67/oYCoGUGmwhwrxqNR3TmdBqRYEk/6e9q76DRdU=";
   };
 
@@ -29,6 +29,10 @@ llvmPackages.stdenv.mkDerivation rec {
     llvmPackages.llvm
     zlib
   ];
+
+  preBuild = ''
+    export HOME=$TMPDIR
+  '';
 
   doCheck = true;
 

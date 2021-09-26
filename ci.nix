@@ -38,7 +38,7 @@ let
     else [ ];
 
   nurCore = import ./default.nix { inherit pkgs; };
-  nurPkgs = collectDrvs nurCore.packages;
+  nurPkgs = concatMap collectDrvs (attrValues nurCore.packages);
 
 in
 
