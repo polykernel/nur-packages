@@ -2,6 +2,6 @@
 
 {
   packages = {
-    zig-master = pkgs.callPackage ./pkgs/zig { llvmPackages = pkgs.llvmPackages_12; };
+    zig-master = pkgs.callPackage ./pkgs/zig { llvmPackages = pkgs.llvmPackages_13; };
   };
 }
