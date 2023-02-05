@@ -1,9 +1,8 @@
-{pkgs ? import <nixpkgs> {}}: {
-  zig-master = pkgs.callPackage ./zig {llvmPackages = pkgs.llvmPackages_14;};
+{pkgs ? import <nixpkgs> {}}:
+
+rec {
   lorien = pkgs.callPackage ./lorien {};
-  waylock = pkgs.callPackage ./waylock {};
   i3bar-river = pkgs.callPackage ./i3bar-river {};
-  levee = pkgs.callPackage ./levee {};
   kickoff = pkgs.callPackage ./kickoff {};
   wired-notify = pkgs.callPackage ./wired-notify {};
   swayimg = pkgs.callPackage ./swayimg {};

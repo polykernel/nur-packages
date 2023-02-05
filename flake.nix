@@ -2,7 +2,7 @@
   description = "An experimental NUR repository";
 
   inputs = {
-    flake-utils.url = "github:numtide/flake-utils?ref=master";
+    flake-utils.url = "github:numtide/flake-utils?ref=main";
     nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
   };
 
@@ -10,7 +10,9 @@
     self,
     nixpkgs,
     flake-utils,
-  }: let
+  }:
+
+  let
     supportedSystems = [
       "x86_64-linux"
       "i686-linux"
@@ -27,7 +29,7 @@
         (
           flake-utils.lib.flattenTree
           (import ./pkgs {
-            pkgs = import nixpkgs {inherit system;};
+            pkgs = import nixpkgs { inherit system; };
           })
         );
     };
