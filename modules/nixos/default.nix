@@ -20,8 +20,5 @@ let
         inherit path;
         content = ./. + "/${builtins.concatStringsSep "/" path}.nix";
       };
-  in [
-    (mkSimplePathDotNix [ "programs" "swayimg" ])
-    (mkSimplePathDotNix [ "programs" "kickoff" ])
-  ];
+  in [ ];
 in buildModuleTree modules
