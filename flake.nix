@@ -2,7 +2,7 @@
   description = "An experimental NUR repository";
 
   inputs = {
-    systems.url = "github:nix-systems/default/main";
+    systems.url = "github:nix-systems/default-linux/main";
 
     dream2nix.url = "github:nix-community/dream2nix/main";
 
@@ -37,7 +37,7 @@
 
           ci =
             let
-              isBuildable = p: !(p.meta.broken or false) && (p.meta.license.free or false);
+              isBuildable = p: !(p.meta.broken or false) && (p.meta.license.free or true);
               isCachable = p: !(p.preferLocalBuild or false);
               shouldRecurseForDerivations = p: lib.isAttrs p && p.recurseForDerivations or false;
 
