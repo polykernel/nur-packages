@@ -12,7 +12,6 @@ let
 
   tomlFormat = pkgs.formats.toml {};
 in
-
 {
   options = {
     programs.kickoff = {

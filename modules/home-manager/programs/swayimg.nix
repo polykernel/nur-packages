@@ -12,7 +12,6 @@ let
 
   iniFormat = pkgs.formats.ini {};
 in
-
 {
   options = {
     programs.swayimg = {

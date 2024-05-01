@@ -8,28 +8,15 @@ on:
       - main
   schedule:
     # Rebuild everyday at 6:55
-    # TIP: Choose a random time here so not all repositories are build at once:
-    # https://www.random.org/clock-times/?num=1&earliest=01%3A00&latest=08%3A00&interval=5&format=html&rnd=new
     - cron:  '55 6 * * *'
 
 jobs:
   tests:
     strategy:
       matrix:
-        # Set this to cache your build results in cachix for faster builds
-        # in CI and for everyone who uses your cache.
-        #
-        # Format: Your cachix cache host name without the ".cachix.org" suffix.
-        # Example: mycache (for mycache.cachix.org)
-        #
-        # For this to work, you also need to set the CACHIX_SIGNING_KEY or
-        # CACHIX_AUTH_TOKEN secret in your repository secrets settings in
-        # Github found at
-        # https://github.com/<your_githubname>/nur-packages/settings/secrets
         cachixName:
           - polypkgs
         nixPath:
-          - nixpkgs=channel:nixos-unstable
           - nixpkgs=channel:nixpkgs-unstable
     runs-on: ubuntu-latest
     steps:
@@ -49,24 +36,10 @@ jobs:
       with:
         name: ${{ matrix.cachixName }}
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    - name: Check evaluation
-      run: |
-        nix-env -f . -qa \* --meta --xml \
-          --allowed-uris https://static.rust-lang.org \
-          --option restrict-eval true \
-          --option allow-import-from-derivation true \
-          --drv-path --show-trace \
-          -I nixpkgs=$(nix-instantiate --find-file nixpkgs) \
-          -I $PWD
     - name: Build nix packages
-      run: nix shell -f '<nixpkgs>' nix-build-uncached -c nix-build-uncached ci.nix -A cacheOutputs
+      run: nix run github:Mic92/nix-fast-build --  --flake .#ci --no-nom --skip-cached
   update:
     env:
-      # Set this to notify the global nur package registry that changes are
-      # available.
-      #
-      # The repo name as used in
-      # https://github.com/nix-community/NUR/blob/master/repos.json
       nurRepo: polykernel
     runs-on: ubuntu-latest
     needs:
